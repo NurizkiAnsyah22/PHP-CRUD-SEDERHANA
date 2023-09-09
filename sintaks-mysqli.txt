@@ -1,0 +1,143 @@
+Tentu, berikut adalah daftar lebih lengkap perintah SQL dan fungsi MySQLi beserta penjelasan singkatnya:
+
+**Perintah SQL Dasar:**
+
+1. **SELECT**: Digunakan untuk mengambil data dari satu atau lebih tabel.
+2. **FROM**: Menentukan tabel yang akan digunakan dalam perintah SELECT.
+3. **WHERE**: Menyaring data berdasarkan kondisi tertentu dalam perintah SELECT.
+4. **INSERT INTO**: Digunakan untuk menambahkan data ke dalam tabel.
+5. **UPDATE**: Untuk memperbarui data yang sudah ada dalam tabel.
+6. **DELETE**: Menghapus data dari tabel.
+7. **CREATE TABLE**: Membuat tabel baru dalam database.
+8. **ALTER TABLE**: Mengubah struktur tabel yang sudah ada.
+9. **DROP TABLE**: Menghapus tabel dari database.
+10. **TRUNCATE TABLE**: Menghapus semua data dari sebuah tabel tetapi tetap mempertahankan struktur tabel.
+11. **CREATE DATABASE**: Membuat basis data baru.
+12. **USE**: Memilih basis data yang akan digunakan.
+13. **ALTER DATABASE**: Mengubah struktur basis data.
+14. **DROP DATABASE**: Menghapus basis data dan semua tabel yang ada di dalamnya.
+15. **ORDER BY**: Mengurutkan hasil query berdasarkan kolom tertentu.
+16. **GROUP BY**: Mengelompokkan hasil query berdasarkan kolom tertentu.
+17. **JOIN**: Menggabungkan data dari dua atau lebih tabel berdasarkan kolom yang sesuai.
+18. **LIMIT**: Membatasi jumlah baris yang akan ditampilkan dalam hasil query.
+19. **DISTINCT**: Mengambil nilai unik dari sebuah kolom.
+20. **COUNT()**: Menghitung jumlah baris atau item dalam hasil query.
+21. **SUM()**: Menghitung jumlah total dari sebuah kolom numerik dalam hasil query.
+22. **AVG()**: Menghitung rata-rata dari sebuah kolom numerik dalam hasil query.
+23. **MAX()**: Mengambil nilai maksimum dari sebuah kolom dalam hasil query.
+24. **MIN()**: Mengambil nilai minimum dari sebuah kolom dalam hasil query.
+
+**Fungsi-fungsi MySQLi:**
+
+1. **mysqli_connect()**: Membuat koneksi ke server database MySQL.
+2. **mysqli_query()**: Menjalankan perintah SQL pada koneksi yang diberikan.
+3. **mysqli_fetch_assoc()**: Mengambil hasil query sebagai asosiatif array.
+4. **mysqli_fetch_array()**: Mengambil hasil query sebagai array numerik dan asosiatif.
+5. **mysqli_num_rows()**: Menghitung jumlah baris hasil query.
+6. **mysqli_affected_rows()**: Mengembalikan jumlah baris yang terpengaruh oleh operasi INSERT, UPDATE, atau DELETE terakhir.
+7. **mysqli_error()**: Mengembalikan pesan kesalahan terakhir dari server MySQL.
+8. **mysqli_close()**: Menutup koneksi ke server database MySQL.
+
+Ini adalah perintah SQL dasar dan fungsi MySQLi yang sering digunakan dalam pengembangan aplikasi web dan database. Harap diingat bahwa penggunaan dan sintaksis dapat bervariasi tergantung pada tipe database yang Anda gunakan (MySQL, PostgreSQL, SQLite, dll.) dan kebutuhan spesifik Anda dalam aplikasi.
+
+
+
+
+Tentu, berikut adalah contoh penggunaan beberapa perintah SQL dan fungsi MySQLi dalam PHP:
+
+**Contoh Koneksi ke Database:**
+
+```php
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$database = "nama_database";
+
+// Membuat koneksi
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+// Memeriksa koneksi
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+echo "Koneksi berhasil";
+?>
+```
+
+**Contoh SELECT Data dari Tabel:**
+
+```php
+<?php
+$sql = "SELECT * FROM nama_tabel";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "ID: " . $row["id"] . " - Nama: " . $row["nama"] . "<br>";
+    }
+} else {
+    echo "Tidak ada data.";
+}
+
+mysqli_close($conn);
+?>
+```
+
+**Contoh INSERT Data ke Tabel:**
+
+```php
+<?php
+$nama = "Contoh Nama";
+$umur = 25;
+
+$sql = "INSERT INTO nama_tabel (nama, umur) VALUES ('$nama', $umur)";
+
+if (mysqli_query($conn, $sql)) {
+    echo "Data berhasil ditambahkan";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+?>
+```
+
+**Contoh UPDATE Data dalam Tabel:**
+
+```php
+<?php
+$nama_baru = "Nama Baru";
+$id = 1;
+
+$sql = "UPDATE nama_tabel SET nama='$nama_baru' WHERE id=$id";
+
+if (mysqli_query($conn, $sql)) {
+    echo "Data berhasil diperbarui";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+?>
+```
+
+**Contoh DELETE Data dari Tabel:**
+
+```php
+<?php
+$id = 1;
+
+$sql = "DELETE FROM nama_tabel WHERE id=$id";
+
+if (mysqli_query($conn, $sql)) {
+    echo "Data berhasil dihapus";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+?>
+```
+
+Ini hanya beberapa contoh penggunaan perintah SQL dan fungsi MySQLi dalam PHP. Pastikan Anda menggantikan "nama_tabel" dan kolom-kolomnya sesuai dengan struktur database Anda. Selain itu, selalu perhatikan masalah keamanan seperti SQL injection dengan menggunakan prepared statements atau metode perlindungan lainnya saat mengembangkan aplikasi web yang melibatkan database.
