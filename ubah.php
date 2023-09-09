@@ -12,7 +12,7 @@ $mhsUbah = query("SELECT * FROM mahasiswa WHERE id= $id")[0];
 //cek apakah tombol sudah di submit
 if (isset($_POST["submit"])) {
 
-    if ( ubah($_POST) > 0) 
+    if ( ubah($_POST) > 0 && $_FILES['gambar']['size'] <= 1000000) 
     {
         echo "
         <script> alert('Data berhasil di ubah!');
@@ -20,6 +20,7 @@ if (isset($_POST["submit"])) {
         </script>
         ";
     } else {
+        
         echo "
         <script> alert('Data gagal di ubah!');
         document.location.href='index.php';
@@ -44,9 +45,10 @@ if (isset($_POST["submit"])) {
 <body>
     <h1>Ubah data</h1>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <ul>
             <input type="hidden" name="id" id="id" value="<?= $mhsUbah["id"]?>">
+            <input type="hidden" name="gambarLama" id="id" value="<?= $mhsUbah["gambar"]?>">
 
             <li> <label for=" nim">Nim : </label>
                 <input type="text" name="nim" id="nim" required value="<?= $mhsUbah["nim"]?>">
@@ -64,12 +66,13 @@ if (isset($_POST["submit"])) {
                 <input type="text" name="jurusan" id="jurusan" required value="<?= $mhsUbah["jurusan"]?>">
             </li>
             <br>
-            <li> <label for="gambar">Gambar : </label>
-                <input type="text" name="gambar" id="gambar" required value="<?= $mhsUbah["gambar"]?>">
+            <li> <label for="gambar">Gambar : </label> <br>
+                <img src="img/<?= $mhsUbah["gambar"]?>" width="50px"> <br>
+                <input type="file" name="gambar" id="gambar">
             </li>
             <br>
             <li>
-                <button type="submit" name="submit">Ubah</button>
+                <button type=" submit" name="submit">Ubah</button>
             </li>
 
         </ul>
