@@ -10,8 +10,8 @@ if (isset($_POST["submit"])) {
         </script>
         ";
     } else {
-        echo "
-        <script> alert('Data gagal di tambahkan!');
+        echo "<script>
+        alert('Data gagal di tambahkan!');
         document.location.href='index.php';
         </script>
         ";
@@ -32,11 +32,11 @@ if (isset($_POST["submit"])) {
 
 <body>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <ul>
 
             <li> <label for="nim">Nim : </label>
-                <input type="text" name="nim" id="nim" required>
+                <input type="number" name="nim" id="nim" required>
             </li>
             <br>
             <li> <label for="nama">Nama : </label>
@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
             </li>
             <br>
             <li> <label for="gambar">Gambar : </label>
-                <input type="text" name="gambar" id="gambar" required>
+                <input type="file" name="gambar" id="gambar">
             </li>
             <br>
             <li>
